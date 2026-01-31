@@ -33,7 +33,10 @@ class CouponDispenser:
             coupon_cards (list[str]): list of possible coupons users can receive.
         """
         # TODO: Implement per instructions
-        pass
+        self.coupon_cards = coupon_cards
+        self.customer_roster = []
+        self.issued_indices = []
+        
 
     def __str__(self):
         """
@@ -44,7 +47,10 @@ class CouponDispenser:
             str
         """
         # TODO: Implement per instructions
-        pass
+        if not self.coupon_cards:
+            return ""
+        return "|".join(self.coupon_cards)
+        
 
     def issue_coupon(self, name):
         """
@@ -61,7 +67,19 @@ class CouponDispenser:
             str: message as described above
         """
         # TODO: Implement per instructions
-        pass
+        if not self.coupon_cards:
+            return "The box is empty."
+        
+        if name in self.customer_roster:
+            i = self.customer_roster.index(name)
+            coupon = self.coupon_cards[self.issued_indices[i]]
+            return "That name already has a coupon: " + coupon 
+        
+        random_index = random.randint(0, len(self.coupon_cards) - 1)
+        self.customer_roster.append(name)
+        self.issued_indices.append(random_index)
+        return self.coupon_cards[random_index]
+        
 
     def distribute_session(self):
         """
@@ -79,7 +97,28 @@ class CouponDispenser:
         Reminder: Use lists only (no dictionaries).
         """
         # TODO: Implement per instructions 
-        pass
+        round_number = 1
+        while True:
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
+
+            if user_input == "exit":
+                print("Goodbye!")
+                break
+
+            elif user_input == "show":
+                for i, name in enumerate(self.customer_roster):
+                    coupon =  self.coupon_cards[self.issued_indices[i]]
+                    print(f"{name}: {coupon}")
+
+            else: 
+                names = user_input.split(",")
+                for name in names:
+                    name = name.strip()
+                    if name:
+                        print(self.issue_coupon(name))
+
+            round_number += 1
+        
 
     def tally_distribution(self):
         """
@@ -97,7 +136,13 @@ class CouponDispenser:
             None
         """
         # TODO: Implement per instructions
-        pass
+        if not self.issued_indices:
+            print("Empty")
+            return
+        for i in range(len(self.coupon_cards)):
+            count = self.issued_indices.count(i)
+            print(f"{self.coupon_cards[i]} distribution count: {count}.")
+        
 
 
 def main():
@@ -116,10 +161,10 @@ def main():
     ]
 
     # Uncomment the lines below as you implement each function.
-    # box = CouponDispenser(coupon_cards)
-    # box.distribute_session()
-    # box.tally_distribution()
-    pass
+    box = CouponDispenser(coupon_cards)
+    box.distribute_session()
+    box.tally_distribution()
+    
 
 
 # -----------------------
