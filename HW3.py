@@ -1,12 +1,12 @@
 # Name: Zuza Harris
 # Student ID: 230053662
 # Email: zuzah@umich.edu
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Who or what you worked with on this homework (including generative AI like ChatGPT): ChatGPT
 # If you worked with generative AI also add a statement for how you used it.
-# e.g.:
+# e.g.: I had a lot of issues with github and my work being saved so I used it for help with that and then also to help me get started with some of the sections.
 # Asked ChatGPT hints for debugging and suggesting the general structure of the code
 # Did your use of GenAI on this assignment align with your goals and guidelines in 
-#    your Gen AI contract? If not, why?
+#    your Gen AI contract? If not, why? - Yes because I still did work through parts myself.
 
 import random
 import io
